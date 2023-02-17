@@ -11,8 +11,8 @@ function addBookToLibrary() {
   displayBooks();
 }
 
-/***USER INTERFACE***/
-const containerBook = document.querySelector('.book-container');
+/***---USER INTERFACE---***/
+const containerBook = document.querySelector('.library');
 const btnAddBook = document.querySelector('.btn-add');
 const modalBook = document.querySelector('#addBookModal');
 
@@ -31,7 +31,7 @@ function hideModal() {
   modalBook.classList.remove('active');
 }
 
-/***DISPLAY BOOKS***/
+/***---DISPLAY BOOKS---***/
 
 function displayBooks() {
   console.log('displaying');
@@ -47,7 +47,7 @@ function buildBookCard(book) {
   card.className = 'book card';
 
   const title = createParagraphWithText(book.title, 'title');
-  const author = createParagraphWithText(book.author, 'author');
+  const author = createParagraphWithText('by ' + book.author, 'author');
   const pages = createParagraphWithText(book.pages, 'pages');
 
   let hasReadButton = document.createElement('button');
