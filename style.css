@@ -2,4 +2,60 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  --primary-dark: #333;
+  --primary-light: #ededed;
+  --secondary-light: #fafafa;
+  font-family: sans-serif;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+}
+
+header {
+  background-color: var(--secondary-light);
+  display: flex;
+  justify-content: space-between;
+  padding: 24px;
+}
+
+body {
+  background-color: var(--primary-light);
+}
+
+.add-book {
+  width: 150px;
+  height: 50px;
+  justify-self: center;
+}
+
+.library {
+  display: grid;
+  justify-content: center;
+}
+
+.add-book:hover {
+  background-color: var(--secondary-light);
+}
+
+.book.container {
+  width: 100vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  padding: 24px;
+}
+
+.book.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  background-color: var(--secondary-light);
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.book.button {
 }
