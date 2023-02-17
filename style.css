@@ -8,7 +8,7 @@
   font-family: sans-serif;
 }
 
-button {
+.btn {
   border: none;
   border-radius: 8px;
 }
@@ -24,19 +24,19 @@ body {
   background-color: var(--primary-light);
 }
 
-.add-book {
+.btn-add {
   width: 150px;
   height: 50px;
   justify-self: center;
 }
 
+.btn-add:hover {
+  background-color: var(--secondary-light);
+}
+
 .library {
   display: grid;
   justify-content: center;
-}
-
-.add-book:hover {
-  background-color: var(--secondary-light);
 }
 
 .book-container {
@@ -58,4 +58,30 @@ body {
 }
 
 .book.button {
+}
+
+/*Modals*/
+
+.modal {
+  display: none;
+  background-color: var(--secondary-light);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  z-index: 1;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+}
+
+.active {
+  display: block;
 }
