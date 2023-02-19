@@ -1,3 +1,33 @@
+/***---USER INTERFACE---***/
+const bookContainer = document.querySelector('.book-container');
+const clearBooksBtn = document.querySelector('#btn-clear');
+const addBookBtn = document.querySelector('#btn-add');
+const addBookModal = document.querySelector('#add-book-modal');
+const addBookForm = document.querySelector('#add-book-form');
+
+clearBooksBtn.addEventListener('click', clearBooks);
+addBookBtn.addEventListener('click', showModal);
+addBookForm.addEventListener('submit', (e) => {
+  submitBook(e);
+  hideModal();
+});
+
+function showModal() {
+  const overlay = document.createElement('div');
+  overlay.classList.add('overlay');
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click', hideModal);
+  addBookModal.classList.add('active');
+}
+
+function hideModal() {
+  document.querySelector('.overlay').remove();
+  addBookModal.classList.remove('active');
+  addBookForm.reset();
+}
+
+/***---BOOK MANAGMENT---***/
+
 let library = [];
 
 function Book(title, author, pages, hasRead) {
@@ -5,40 +35,68 @@ function Book(title, author, pages, hasRead) {
   this.author = author;
   this.pages = pages;
   this.hasRead = hasRead;
+
+  this.toggleRead = function () {
+    if (this.hasRead) {
+      this.hasRead = false;
+    } else {
+      this.hasRead = true;
+    }
+    displayBooks();
+  };
+
+  this.remove = function () {
+    const index = library.findIndex((book) => book === this);
+    if (index !== -1) {
+      library.splice(index, 1);
+    }
+    displayBooks();
+  };
 }
 
-function addBookToLibrary() {
+function addBookToLibrary(newBook) {
+  if (checkForCopy(newBook)) return;
+
+  library.push(newBook);
   displayBooks();
 }
 
-/***---USER INTERFACE---***/
-const containerBook = document.querySelector('.library');
-const btnAddBook = document.querySelector('.btn-add');
-const modalBook = document.querySelector('#addBookModal');
+function checkForCopy(newBook) {
+  const bookExists = library.find(
+    (book) => book.title === newBook.title && book.author === newBook.author
+  );
 
-btnAddBook.addEventListener('click', showModal);
-
-function showModal() {
-  const overlay = document.createElement('div');
-  overlay.classList.add('overlay');
-  document.body.appendChild(overlay);
-  overlay.addEventListener('click', hideModal);
-  modalBook.classList.add('active');
+  if (bookExists) {
+    alert('Book already exists');
+    return true;
+  }
 }
 
-function hideModal() {
-  document.querySelector('.overlay').remove();
-  modalBook.classList.remove('active');
+function submitBook(e) {
+  e.preventDefault();
+  const title = document.getElementById('title').value;
+  const author = document.getElementById('author').value;
+  const pages = document.getElementById('pages').value;
+  const hasRead = document.getElementById('has-read').checked;
+  addBookToLibrary(new Book(title, author, pages, hasRead));
+}
+
+function clearBooks() {
+  library = [];
+  displayBooks();
 }
 
 /***---DISPLAY BOOKS---***/
 
-function displayBooks() {
-  console.log('displaying');
+function resetBookDisplay() {
+  bookContainer.innerHTML = '';
+}
 
+function displayBooks() {
+  resetBookDisplay();
   library.forEach(function (book) {
     let currentBook = buildBookCard(book);
-    containerBook.appendChild(currentBook);
+    bookContainer.appendChild(currentBook);
   });
 }
 
@@ -51,12 +109,20 @@ function buildBookCard(book) {
   const pages = createParagraphWithText(book.pages, 'pages');
 
   let hasReadButton = document.createElement('button');
+  hasReadButton.addEventListener('click', () => book.toggleRead());
   hasReadButton.className = 'btn btn-read';
-  hasReadButton.textContent = 'Not read';
+  if (book.hasRead) {
+    hasReadButton.classList.add('read');
+    hasReadButton.textContent = 'Read';
+  } else {
+    hasReadButton.classList.add('not-read');
+    hasReadButton.textContent = 'Not read';
+  }
 
   let removeButton = document.createElement('button');
+  removeButton.addEventListener('click', () => book.remove());
   removeButton.className = 'btn btn-remove';
-  removeButton.textContent = 'remove';
+  removeButton.textContent = 'Remove';
 
   card.appendChild(title);
   card.appendChild(author);

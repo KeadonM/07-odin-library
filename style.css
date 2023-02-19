@@ -78,7 +78,7 @@ main {
   display: grid;
 }
 
-.btn-add {
+#btn-add {
   justify-self: center;
   width: 150px;
   height: 50px;
@@ -87,7 +87,7 @@ main {
   font-weight: bold;
 }
 
-.library {
+.book-container {
   width: 100vw;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -140,7 +140,7 @@ main {
   padding: var(--spacing-xsm);
 }
 
-.submit-btn {
+#submit-btn {
   background-color: var(--blue);
 }
 
