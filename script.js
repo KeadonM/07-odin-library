@@ -1,5 +1,5 @@
 /***---USER INTERFACE---***/
-const bookContainer = document.querySelector('.book-container');
+const bookGrid = document.querySelector('.book-grid');
 const clearBooksBtn = document.querySelector('#btn-clear');
 const addBookBtn = document.querySelector('#btn-add');
 const modalOverlay = document.querySelector('.modal-overlay');
@@ -61,10 +61,6 @@ function Book(title, author, pages, hasRead) {
   };
 }
 
-for (let i = 0; i < 10; i++) {
-  addBookToLibrary(new Book('Title', 'Author', '123', false));
-}
-
 function addBookToLibrary(newBook) {
   library.push(newBook);
   displayNewBook(newBook);
@@ -98,7 +94,7 @@ function clearBooks() {
 /***---DISPLAY BOOKS---***/
 
 function resetBookDisplay() {
-  bookContainer.innerHTML = '';
+  bookGrid.innerHTML = '';
 }
 
 function displayAllBooks() {
@@ -110,7 +106,7 @@ function displayAllBooks() {
 
 function displayNewBook(newBook) {
   let currentBook = buildBookCard(newBook);
-  bookContainer.appendChild(currentBook);
+  bookGrid.appendChild(currentBook);
   setTimeout(function () {
     currentBook.classList.add('animate-in');
   }, 10);

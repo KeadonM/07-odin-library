@@ -87,8 +87,7 @@ main {
   font-weight: bold;
 }
 
-.book-container {
-  width: 100vw;
+.book-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: var(--spacing-lg);
