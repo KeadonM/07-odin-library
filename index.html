@@ -16,6 +16,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/7881ce7c0a.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="script.js" defer></script>
     <title>My Library</title>
   </head>
@@ -30,7 +34,16 @@
       <div class="book-container"></div>
     </main>
 
-    <footer></footer>
+    <footer>
+      <a id="copyright" href="https://github.com/keadonm" target="_blank">
+        Copyright ©
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        KeadonM
+        <i class="fab fa-github"></i>
+      </a>
+    </footer>
 
     <div class="modal-container"></div>
     <div class="modal-overlay"></div>
