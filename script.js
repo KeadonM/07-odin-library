@@ -62,6 +62,8 @@ function Book(title, author, pages, hasRead) {
 }
 
 function addBookToLibrary(newBook) {
+  if (checkForCopy(newBook)) return;
+
   library.push(newBook);
   displayNewBook(newBook);
 }
